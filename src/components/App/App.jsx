@@ -60,6 +60,9 @@ function App() {
             ]
         },
     ]);
+    const [money, setMoney] = useState(1000);
+    const [days, setDays] = useState(1);
+
 
     const goods = [
         {
@@ -155,7 +158,10 @@ function App() {
                         <Transportation/>
                     </div>
                     <div className="stats">
-                        <Stats/>
+                        <Stats days={days}
+                               money={money}
+
+                        />
                     </div>
                 </div>
                 <div className="column">
