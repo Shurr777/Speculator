@@ -2,8 +2,9 @@ import './App.scss';
 import Cities from "../Cities/Cities";
 import Storage from "../Storage/Storage";
 import CityStorage from "../CityStorage/CityStorage";
-import Transportattion from "../Transportation/transportattion";
 import {useState} from "react";
+import Transportation from "../Transportation/transportattion";
+import Stats from "../Stats/Stats";
 
 function App() {
     const [currentCity, setCurrentCity] = useState(1);
@@ -17,7 +18,31 @@ function App() {
                 },
                 {
                     id: 2,
-                    qty: 10
+                    qty: 12
+                },
+                {
+                    id: 3,
+                    qty: 193
+                },
+                {
+                    id: 4,
+                    qty: 144
+                },
+                {
+                    id: 5,
+                    qty: 155
+                },
+                {
+                    id: 6,
+                    qty: 176
+                },
+                {
+                    id: 7,
+                    qty: 137
+                },
+                {
+                    id: 8,
+                    qty: 158
                 },
             ]
         },
@@ -39,11 +64,59 @@ function App() {
     const goods = [
         {
             id: 1,
-            title: 'Камень'
+            title: 'Пиво'
         },
         {
             id: 2,
-            title: 'Дерево'
+            title: 'Молоко'
+        },
+        {
+            id: 3,
+            title: 'Зерно'
+        },
+        {
+            id: 4,
+            title: 'Грибы'
+        },
+        {
+            id: 5,
+            title: 'Клевер'
+        },
+        {
+            id: 6,
+            title: 'Лук'
+        },
+        {
+            id: 7,
+            title: 'Виноград'
+        },
+        {
+            id: 8,
+            title: 'Орехи'
+        },
+        {
+            id: 9,
+            title: 'Вилы'
+        },
+        {
+            id: 10,
+            title: 'Доски'
+        },
+        {
+            id: 11,
+            title: 'Коса'
+        },
+        {
+            id: 12,
+            title: 'Лопата'
+        },
+        {
+            id: 13,
+            title: 'Топор'
+        },
+        {
+            id: 14,
+            title: 'Кирка'
         }
     ];
 
@@ -79,7 +152,10 @@ function App() {
                         />
                     </div>
                     <div className="transportation">
-                        <Transportattion/>
+                        <Transportation/>
+                    </div>
+                    <div className="stats">
+                        <Stats/>
                     </div>
                 </div>
                 <div className="column">
