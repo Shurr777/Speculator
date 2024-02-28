@@ -1,0 +1,27 @@
+.app {
+  margin: 0 auto;
+  text-align: center;
+  width: 800px;
+  background: #665858;
+
+  .app-name {
+    text-align: center;
+    padding: 0;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #2d251a;
+
+    .column {
+      width: 300px;
+
+      &:last-child {
+        width: 480px;
+      }
+    }
+  }
+}
+
