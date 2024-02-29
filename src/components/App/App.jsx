@@ -2,9 +2,9 @@ import './App.scss';
 import Cities from "../Cities/Cities";
 import Storage from "../Storage/Storage";
 import CityStorage from "../CityStorage/CityStorage";
-import {useState} from "react";
 import Transportation from "../Transportation/transportattion";
 import Stats from "../Stats/Stats";
+import {useState} from "react";
 
 function App() {
     const [currentCity, setCurrentCity] = useState(1);
