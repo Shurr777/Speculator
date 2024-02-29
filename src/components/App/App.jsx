@@ -8,6 +8,7 @@ import Stats from "../Stats/Stats";
 
 function App() {
     const [currentCity, setCurrentCity] = useState(1);
+    const [selectedGood, setSelectedGood] = useState(null);
     const [storages, setStorages] = useState([
         {
             cityId: 1,
@@ -124,15 +125,45 @@ function App() {
     ];
 
     const getStorageByCity = () => {
-        const store = storages.find((storage)=>{
+        const store = storages.find((storage) => {
             return storage.cityId === currentCity
-            });
-        if(store){
+        });
+        if (store) {
             return store.storage
-        }else {
+        } else {
             return []
         }
     }
+
+    const cellGoods = (goodId, qty) => {
+        const storagesNew = storages;
+        let moneyNew = money
+
+        const index = storages.findIndex((storage) => {
+            return storage.cityId === currentCity
+        })
+
+        if (index > -1) {
+            const goodIndex = storagesNew[index].storage.findIndex((good) => {
+                return good.id === goodId
+            });
+
+            if (goodIndex > -1) {
+                storagesNew[index].storage[goodIndex].qty -= qty
+                moneyNew += qty * 10;
+                setMoney(moneyNew)
+            }
+        }
+
+        setStorages(storagesNew);
+    }
+
+    const liveProcess = () => {
+        setTimeout(() => {
+            setDays(days + 1)
+        }, 10000)
+    }
+    liveProcess()
 
     return (
         <div className="app">
@@ -152,6 +183,9 @@ function App() {
                         <Storage currentCity={currentCity}
                                  storage={getStorageByCity()}
                                  goods={goods}
+                                 selectedGood={selectedGood}
+                                 onSelectGood={(goodId) => {setSelectedGood(goodId)}}
+                                 onCell={(id, qty) => {cellGoods(id, qty)}}
                         />
                     </div>
                     <div className="transportation">

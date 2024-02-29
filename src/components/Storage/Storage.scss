@@ -14,8 +14,13 @@
     font-size: 12px;
     background-image: url("../img/icons.png");
     background-repeat: no-repeat;
+    cursor: pointer;
 
-    .good-description{
+    &.selected {
+      border-color: yellow;
+    }
+
+    .good-description {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -29,8 +34,9 @@
       opacity: 0.65;
     }
 
-    &.no-item{
+    &.no-item {
       background-image: none;
+      cursor: default;
     }
 
     &.item-1 {
@@ -87,6 +93,51 @@
 
     &.item-14 {
       background-position: -330px -55px;
+    }
+  }
+}
+
+.sell-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+
+    .input {
+      background: none;
+      width: 50px;
+      border: 1px solid #877f72;
+      color: #a68156;
+      margin-right: 5px;
+
+      &:focus {
+      }
+
+      &:active {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    .button {
+      background: #44200c;
+      color: #a68156;
+      border: 1px solid #877f72;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 20px;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
+
+      &:hover {
+        color: wheat;
+      }
     }
   }
 }
