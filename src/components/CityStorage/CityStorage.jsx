@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './CityStorage.scss';
 
 import {
@@ -24,7 +24,7 @@ ChartJS.register(
 );
 
 
-const CityStorage = ({storage}) => {
+const CityStorage = ({storage, onBuy}) => {
 
     const options = {
         legend: {
@@ -64,8 +64,10 @@ const CityStorage = ({storage}) => {
         },
     };
 
-    const getGoodData = (priceStats) =>{
-        return{
+    const [number, setNumber] = useState(0)
+
+    const getGoodData = (priceStats) => {
+        return {
             labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
             datasets: [
                 {
@@ -86,7 +88,32 @@ const CityStorage = ({storage}) => {
                     {storage.map((good) => {
                         return (
                             <div className="good-item-wrapper">
-                                <div className={"good-item item-" + good.id}></div>
+                                <div className="good-item-description">
+                                    <div className={"good-item item-" + good.id}/>
+                                    <input
+                                        className="input-number"
+                                        name="count"
+                                        value={number}
+                                        maxLength={3}
+                                        autoComplete={false}
+                                        onChange={(e) => {
+                                            setNumber(e.currentTarget.value)
+                                        }}
+                                    />
+
+                                    <button className="button"
+                                            onClick={() => {
+                                                onBuy(good.id, number, good.priceStats[good.priceStats.length - 1]);
+                                                setNumber(0);
+                                            }}
+                                    >
+                                        Купить
+                                    </button>
+
+                                    <p className='price-description'>
+                                        {good.priceStats[good.priceStats.length - 1]} за ед.
+                                    </p>
+                                </div>
                                 <div className="good-item-stats">
                                     <Line
                                         data={getGoodData(good.priceStats)}

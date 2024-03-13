@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a9302cb1-ca2e-48ba-94b2-d999abe27622" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Storage/Storage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Storage/Storage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +35,10 @@
     "WebServerToolWindowFactoryState": "false",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -44,7 +51,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709996205319</updated>
-      <workItem from="1709996207375" duration="3387000" />
+      <workItem from="1709996207375" duration="7603000" />
+      <workItem from="1710330415119" duration="5146000" />
     </task>
     <servers />
   </component>

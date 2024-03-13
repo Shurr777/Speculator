@@ -13,10 +13,10 @@ function App() {
         {
             cityId: 1,
             storage: [
-                {
+                /*{
                     id: 1,
                     qty: 10
-                },
+                },*/
                 {
                     id: 2,
                     qty: 12
@@ -154,6 +154,9 @@ function App() {
         }
     ];
 
+    useEffect(() => {
+        liveProcess()
+    }, []);
 
     const getStorageByCity = () => {
         const store = storages.find((storage) => {
@@ -200,7 +203,7 @@ function App() {
         setStorages(storagesNew);
     }
 
-    const getRandomInt = (max) =>{
+    const getRandomInt = (max) => {
         return Math.floor(Math.random() * Math.floor(max))
     }
 
@@ -218,12 +221,12 @@ function App() {
 
                 let newPrice = goodData.priceStats.slice(-1).pop() + priceChangeValue;
 
-                if(newPrice > goodData.maxPrice){
-                    newPrice =  goodData.maxPrice
+                if(newPrice > goodData.maxPrice) {
+                    newPrice = goodData.maxPrice
                 }
 
-                if(newPrice < goodData.minPrice){
-                    newPrice =  goodData.minPrice
+                if(newPrice < goodData.minPrice) {
+                    newPrice = goodData.minPrice
                 }
 
                 for (let i = 0; i < goodData.priceStats.length - 1; i++) {
@@ -243,13 +246,42 @@ function App() {
     const liveProcess = () => {
         setInterval(() => {
             updateCityStorages();
-            setDays(days => days+ 1);
+            setDays(days => days + 1);
         }, 3000)
     }
 
-    useEffect(() => {
-        liveProcess()
-    }, []);
+
+
+    const buyGoods = (goodId, qty, price) => {
+        const totalPrice = qty * price;
+        if(money >= totalPrice) {
+
+            const storagesNew = storages;
+
+            const index = storages.findIndex((storage) => {
+                return storage.cityId === currentCity
+            })
+
+            if(index > -1) {
+                const goodIndex = storagesNew[index].storage.findIndex((good) => {
+                    return good.id === goodId
+                });
+
+                if(goodIndex > -1) {
+                    const newQty = parseInt(storagesNew[index].storage[goodIndex].qty) + parseInt(qty, 10)
+                    storagesNew[index].storage[goodIndex].qty = newQty;
+                } else {
+                    storagesNew[index].storage.push({
+                        id: goodId,
+                        qty: qty
+                    });
+                }
+            }
+
+            setStorages(storagesNew);
+            setMoney(money - totalPrice)
+        }
+    }
 
 
     return (
@@ -257,7 +289,6 @@ function App() {
             <h1 className="app-name">
                 Спекулянт
             </h1>
-
             <Cities currentCity={currentCity}
                     onChange={(city) => {
                         setCurrentCity(city)
@@ -293,6 +324,10 @@ function App() {
                     <div className="city-storage">
                         <CityStorage
                             storage={getCityStorage()}
+                            onBuy={(goodId, number, price) => {
+                                buyGoods(goodId, number, price)
+                            }
+                            }
                         />
                     </div>
                 </div>
