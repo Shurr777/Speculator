@@ -154,9 +154,7 @@ function App() {
         }
     ];
 
-    useEffect(() => {
-        liveProcess()
-    }, []);
+
 
     const getStorageByCity = () => {
         const store = storages.find((storage) => {
@@ -283,6 +281,9 @@ function App() {
         }
     }
 
+    useEffect(() => {
+        liveProcess()
+    }, []);
 
     return (
         <div className="app">

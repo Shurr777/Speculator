@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import './CityStorage.scss';
+import StorageItem from "./components/StorageItem";
+import {Line} from 'react-chartjs-2';
 
 import {
     Chart as ChartJS,
@@ -11,7 +13,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import {Line} from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,
@@ -64,8 +65,6 @@ const CityStorage = ({storage, onBuy}) => {
         },
     };
 
-    const [number, setNumber] = useState(0)
-
     const getGoodData = (priceStats) => {
         return {
             labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
@@ -87,8 +86,9 @@ const CityStorage = ({storage, onBuy}) => {
                 <div className="city-goods">
                     {storage.map((good) => {
                         return (
-                            <div className="good-item-wrapper">
-                                <div className="good-item-description">
+                            <div key={"storage-item" + good.id} className="good-item-wrapper">
+                                <StorageItem good={good} onBuy={onBuy}/>
+                                {/*<div className="good-item-description">
                                     <div className={"good-item item-" + good.id}/>
                                     <input
                                         className="input-number"
@@ -113,7 +113,7 @@ const CityStorage = ({storage, onBuy}) => {
                                     <p className='price-description'>
                                         {good.priceStats[good.priceStats.length - 1]} за ед.
                                     </p>
-                                </div>
+                                </div>*/}
                                 <div className="good-item-stats">
                                     <Line
                                         data={getGoodData(good.priceStats)}
