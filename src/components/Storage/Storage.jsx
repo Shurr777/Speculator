@@ -3,7 +3,7 @@ import './Storage.scss';
 
 const Storage = (props) => {
 
-    const [qty, setQty] = useState(null)
+    const [qty, setQty] = useState('')
 
     const findGoodById = (id) => {
         return props.goods.find((item) => {
@@ -12,11 +12,12 @@ const Storage = (props) => {
     }
 
     const getEmptyCells = () => {
-        if (props.storage.length < 8) {
+        if(props.storage.length < 8) {
             return Array(8 - props.storage.length)
                 .fill()
                 .map(() => {
-                    return <li className="good-item no-item"></li>
+                    return <li key={"empty-cell-" + (8 - props.storage.length)}
+                               className="good-item no-item"></li>
                 })
         }
     }
@@ -26,8 +27,9 @@ const Storage = (props) => {
         <div className="panel">
             <ul className="goods">
                 {props.storage.map((item) => {
-                    return <li className={"good-item item-" + item.id +
-                        (props.selectedGood === item.id ? ' selected' : "")}
+                    return <li key={"storage-item-" + item.id}
+                               className={"good-item item-" + item.id +
+                                   (props.selectedGood === item.id ? ' selected' : "")}
                                onClick={() => {
                                    props.onSelectGood(item.id)
                                }
@@ -44,14 +46,16 @@ const Storage = (props) => {
                     <div className='controls'>
                         <input type="text"
                                className="input"
+                               maxLength="5"
                                value={qty}
-                               onChange={(event)=>{
-                                   setQty(parseInt(event.target.value, 10))
+                               onChange={(event) => {
+                                   setQty(parseInt(event.target.value, 10) || '')
                                }}
                         />шт
                         <button className="button"
                                 onClick={() => {
-                                    props.onCell(props.selectedGood, qty)
+                                    props.onCell(props.selectedGood, qty);
+                                    setQty('')
                                 }}
                         >
                             Продать

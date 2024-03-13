@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 const StorageItem = ({good, onBuy}) => {
 
-    const [number, setNumber] = useState(0)
+    const [number, setNumber] = useState('')
 
     return (
         <div>
@@ -15,14 +15,14 @@ const StorageItem = ({good, onBuy}) => {
                     maxLength={3}
                     autoComplete="false"
                     onChange={(e) => {
-                        setNumber(e.currentTarget.value)
+                        setNumber(parseInt(e.currentTarget.value, 10 || ''))
                     }}
                 />
 
                 <button className="button"
                         onClick={() => {
                             onBuy(good.id, number, good.priceStats[good.priceStats.length - 1]);
-                            setNumber(0);
+                            setNumber('');
                         }}
                 >
                     Купить
