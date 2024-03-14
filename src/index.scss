@@ -5,12 +5,13 @@ body {
 
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
 }
 
 input {
   box-sizing: border-box;
+
   &:focus,
   &:active {
     box-shadow: none;
@@ -24,7 +25,6 @@ input {
   border: 1px solid #877f72;
   font-size: 12px;
   cursor: pointer;
-  margin-left: 20px;
 
   &:focus,
   &:active {
@@ -32,6 +32,15 @@ input {
   }
 
   &:hover {
-    color: wheat;
+    color: white;
+  }
+
+  &[disabled] {
+    background: #777;
+    cursor: not-allowed;
+
+    &:hover {
+      color: #a68156;
+    }
   }
 }
