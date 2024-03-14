@@ -11,7 +11,7 @@ const Storage = (props) => {
         }).title;
     }
 
-    const getEmptyCells = () => {
+/*    const getEmptyCells = () => {
         if(props.storage.length < 8) {
             return Array(8 - props.storage.length)
                 .fill()
@@ -20,25 +20,35 @@ const Storage = (props) => {
                                className="good-item no-item"></li>
                 })
         }
-    }
+    }*/
 
     return (<div>
         <h2 className="title">Мой склад</h2>
         <div className="panel">
             <ul className="goods">
-                {props.storage.map((item) => {
-                    return <li key={"storage-item-" + item.id}
-                               className={"good-item item-" + item.id +
-                                   (props.selectedGood === item.id ? ' selected' : "")}
-                               onClick={() => {
-                                   props.onSelectGood(item.id)
-                               }
-                               }
-                    >
-                        <span className="good-description">{item.qty} шт</span>
-                    </li>
+                {Array(8).fill().map((i, index) => {
+                    if(props.storage[index]) {
+                        const item = props.storage[index];
+
+                        return (
+                            <li key={"storage-item-" + item.id}
+                                className={"good-item item-" + item.id +
+                                    (props.selectedGood === item.id ? ' selected' : "")}
+                                onClick={() => {
+                                    props.onSelectGood(item.id)
+                                }
+                                }
+                            >
+                                <span className="good-description">{item.qty} шт</span>
+                            </li>
+                        );
+                    } else {
+                        return (
+                            <li key={"empty-cell-" + index}
+                                className="good-item no-item"></li>
+                        )
+                    }
                 })}
-                {getEmptyCells()}
             </ul>
             {props.selectedGood ? (
                 <div className='sell-panel'>
