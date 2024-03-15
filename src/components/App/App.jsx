@@ -153,6 +153,7 @@ function App() {
             title: 'Кирка'
         }
     ];
+    const [transportOrders, setTransportOrders] = useState([])
 
 
     const getStorageByCity = () => {
@@ -211,20 +212,18 @@ function App() {
                 if(goodIndex > -1) {
                     const price =
                         currentCityStorage[goodIndex].priceStats[
-                            currentCityStorage[goodIndex].priceStats.length - 1
+                        currentCityStorage[goodIndex].priceStats.length - 1
                             ];
 
-                    if (storagesNew[index].storage[goodIndex].qty >= qty){
+                    if(storagesNew[index].storage[goodIndex].qty >= qty) {
 
-                    storagesNew[index].storage[goodIndex].qty -= qty
-                    moneyNew += qty * price;
-                    setMoney(moneyNew)
+                        storagesNew[index].storage[goodIndex].qty -= qty
+                        moneyNew += qty * price;
+                        setMoney(moneyNew)
                     }
                 }
-
             }
         }
-
         setStorages(storagesNew);
     }
 
@@ -275,6 +274,24 @@ function App() {
         }, 3000)
     }
 
+    const createTransportOrder = (targetCityId) => {
+        const newOrders = transportOrders;
+
+        const storage = getStorageByCity()
+        const goodIndex = storage.findIndex(good => good.id == selectedGood);
+
+        if(goodIndex > -1) {
+            newOrders.push({
+                targetCityId,
+                qty: storage[goodIndex].qty,
+                goodId: selectedGood,
+                days: 30,
+            })
+            setTransportOrders(newOrders)
+        }
+
+        console.log('NewOrders', newOrders)
+    }
 
     const buyGoods = (goodId, qty, price) => {
         const totalPrice = qty * price;
@@ -334,6 +351,9 @@ function App() {
                                  }}
                                  onCell={(id, qty) => {
                                      cellGoods(id, qty)
+                                 }}
+                                 onTransport={(targetCityId) => {
+                                     createTransportOrder(targetCityId)
                                  }}
                         />
                     </div>
