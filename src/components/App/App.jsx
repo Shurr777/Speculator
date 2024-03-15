@@ -267,21 +267,36 @@ function App() {
         setCityStorages(newCityStorages)
     }
 
+    const updateTransportOrders = () => {
+        setTransportOrders((oldTransportOrders) => {
+            const newOrders = [...oldTransportOrders];
+
+            newOrders.forEach((order, index) => {
+                if(order.days >= 1) {
+                    --order.days
+                }
+            });
+            return newOrders;
+        })
+    }
+
     const liveProcess = () => {
         setInterval(() => {
             updateCityStorages();
+            updateTransportOrders()
             setDays(days => days + 1);
         }, 3000)
     }
 
     const createTransportOrder = (targetCityId) => {
-        const newOrders = transportOrders;
+        const newOrders = [...transportOrders];
 
         const storage = getStorageByCity()
-        const goodIndex = storage.findIndex(good => good.id == selectedGood);
+        const goodIndex = storage.findIndex(good => good.id === selectedGood);
 
         if(goodIndex > -1) {
             newOrders.push({
+                fromCityId: currentCity,
                 targetCityId,
                 qty: storage[goodIndex].qty,
                 goodId: selectedGood,
@@ -358,7 +373,9 @@ function App() {
                         />
                     </div>
                     <div className="transportation">
-                        <Transportation/>
+                        <Transportation orders={transportOrders}
+                                        goods={goods}
+                        />
                     </div>
                     <div className="stats">
                         <Stats days={days}
