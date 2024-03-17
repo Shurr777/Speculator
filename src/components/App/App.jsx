@@ -154,6 +154,7 @@ function App() {
         }
     ];
     const [transportOrders, setTransportOrders] = useState([])
+    const [orderId, setOrderId] = useState(1)
 
 
     const getStorageByCity = () => {
@@ -220,7 +221,7 @@ function App() {
                         storagesNew[index].storage[goodIndex].qty -= qty
                         moneyNew += qty * price;
 
-                        if(storagesNew[index].storage[goodIndex].qty === 0){
+                        if(storagesNew[index].storage[goodIndex].qty === 0) {
                             removeProduct(storagesNew[index].storage[goodIndex].id)
                         }
 
@@ -301,22 +302,20 @@ function App() {
 
         if(goodIndex > -1) {
             newOrders.push({
+                id: orderId,
                 fromCityId: currentCity,
                 targetCityId,
                 qty: storage[goodIndex].qty,
                 goodId: selectedGood,
-                days: 30,
+                days: 3,
             })
-
+            setOrderId(orderId + 1)
             removeProduct(selectedGood);
-
             setTransportOrders(newOrders)
         }
-
-       /* console.log('NewOrders', newOrders)*/
     }
 
-    const removeProduct = (productId) =>{
+    const removeProduct = (productId) => {
         const storagesNew = storages;
 
         const index = storages.findIndex((storage) => {
@@ -330,8 +329,8 @@ function App() {
 
             if(productIndex > -1) {
                 storagesNew[index].storage.splice(productIndex, 1)
-                }
             }
+        }
         setStorages(storagesNew);
     };
 
@@ -364,6 +363,22 @@ function App() {
             setStorages(storagesNew);
             setMoney(money - totalPrice)
         }
+    }
+
+    const acceptOrder = (order) => {
+        setTransportOrders(orders => {
+            const newOrders = [...orders];
+
+            const index = newOrders.findIndex(o => {
+                return o.id === order.id;
+            });
+
+            if(index > -1) {
+                newOrders.splice(index, 1);
+            }
+            return newOrders
+        })
+
     }
 
     useEffect(() => {
@@ -402,6 +417,7 @@ function App() {
                     <div className="transportation">
                         <Transportation orders={transportOrders}
                                         goods={goods}
+                                        onAcceptOrder={acceptOrder}
                         />
                     </div>
                     <div className="stats">

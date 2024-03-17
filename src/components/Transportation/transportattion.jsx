@@ -28,7 +28,7 @@ const Transportation = (props) => {
                             </div>
                             <div className="good-item-transport-info">
                                 <div>
-                                    <div className="header">{findGoodById(order.goodId)}</div>
+                                    <div className="header">{findGoodById(order.goodId)}, {order.qty} шт.</div>
                                     <div className="path">
                                         {getCityNameById(order.fromCityId)} ->
                                         {getCityNameById(order.targetCityId)}
@@ -37,7 +37,11 @@ const Transportation = (props) => {
                                 <div>
                                     <div className="days">Дни {order.days}</div>
                                     <button className="button"
-                                            disabled={order.days ? true : false}
+                                            /*disabled={order.days ? true : false}*/
+                                            disabled={!!order.days}
+                                            onClick={()=>{
+                                                props.onAcceptOrder(order);
+                                            }}
                                     >Получить
                                     </button>
                                 </div>
