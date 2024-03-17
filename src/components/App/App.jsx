@@ -336,8 +336,8 @@ function App() {
 
     const buyGoods = (goodId, qty, price) => {
         const totalPrice = qty * price;
-        if(money >= totalPrice) {
 
+        if(money >= totalPrice) {
             const storagesNew = storages;
 
             const index = storages.findIndex((storage) => {
@@ -378,7 +378,28 @@ function App() {
             }
             return newOrders
         })
+        //update product qty in target city
+        const storagesNew = storages;
 
+        const index = storages.findIndex((storage) => {
+            return storage.cityId === order.targetCityId;
+        })
+
+        if(index > -1) {
+            const goodIndex = storagesNew[index].storage.findIndex((good) => {
+                return good.id === order.goodId
+            });
+
+            if(goodIndex > -1) {
+                storagesNew[index].storage[goodIndex].qty += order.qty;
+            } else {
+                storagesNew[index].storage.push({
+                    id: order.goodId,
+                    qty: order.qty
+                });
+            }
+        }
+        setStorages(storagesNew);
     }
 
     useEffect(() => {
