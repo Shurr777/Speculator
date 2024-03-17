@@ -205,14 +205,14 @@ function App() {
             if(goodIndex > -1) {
                 const currentCityStorage = getCityStorageByCity();
 
-                const goodIndex = currentCityStorage.findIndex(good => {
+                const cityGoodIndex = currentCityStorage.findIndex(good => {
                     return good.id === goodId;
                 });
 
-                if(goodIndex > -1) {
+                if(cityGoodIndex > -1) {
                     const price =
-                        currentCityStorage[goodIndex].priceStats[
-                        currentCityStorage[goodIndex].priceStats.length - 1
+                        currentCityStorage[cityGoodIndex].priceStats[
+                        currentCityStorage[cityGoodIndex].priceStats.length - 1
                             ];
 
                     if(storagesNew[index].storage[goodIndex].qty >= qty) {
