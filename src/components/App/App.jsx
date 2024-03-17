@@ -219,6 +219,11 @@ function App() {
 
                         storagesNew[index].storage[goodIndex].qty -= qty
                         moneyNew += qty * price;
+
+                        if(storagesNew[index].storage[goodIndex].qty === 0){
+                            removeProduct(storagesNew[index].storage[goodIndex].id)
+                        }
+
                         setMoney(moneyNew)
                     }
                 }
