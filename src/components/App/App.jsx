@@ -302,11 +302,33 @@ function App() {
                 goodId: selectedGood,
                 days: 30,
             })
+
+            removeProduct(selectedGood);
+
             setTransportOrders(newOrders)
         }
 
-        console.log('NewOrders', newOrders)
+       /* console.log('NewOrders', newOrders)*/
     }
+
+    const removeProduct = (productId) =>{
+        const storagesNew = storages;
+
+        const index = storages.findIndex((storage) => {
+            return storage.cityId === currentCity
+        })
+
+        if(index > -1) {
+            const productIndex = storagesNew[index].storage.findIndex((product) => {
+                return product.id === productId;
+            });
+
+            if(productIndex > -1) {
+                storagesNew[index].storage.splice(productIndex, 1)
+                }
+            }
+        setStorages(storagesNew);
+    };
 
     const buyGoods = (goodId, qty, price) => {
         const totalPrice = qty * price;
