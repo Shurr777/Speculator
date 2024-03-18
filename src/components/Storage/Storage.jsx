@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './Storage.scss';
 import {cities} from "../../cities";
+import {isDisabled} from "@testing-library/user-event/dist/utils";
 
 const Storage = (props) => {
 
@@ -77,7 +78,12 @@ const Storage = (props) => {
                                     }}
                             >
                                 {cities.map(city => {
-                                        return <option value={city.id}>{city.title}</option>
+                                        return <option
+                                            value={city.id}
+                                            disabled={city.id === props.currentCity}
+                                        >
+                                            {city.title}
+                                        </option>
                                     }
                                 )}
                             </select>
@@ -87,8 +93,8 @@ const Storage = (props) => {
                             <button className="button"
                                     onClick={() => {
                                         props.onTransport(targetCityId)
-                                        //todo
                                     }}
+                                        disabled={targetCityId === props.currentCity}
                             >
                                 Перевезти
                             </button>
