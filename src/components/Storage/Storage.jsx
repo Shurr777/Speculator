@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Storage.scss';
+import {cities} from "../../cities";
 
 const Storage = (props) => {
 
@@ -19,28 +20,28 @@ const Storage = (props) => {
                 {Array(8)
                     .fill()
                     .map((i, index) => {
-                    if(props.storage[index]) {
-                        const item = props.storage[index];
+                        if(props.storage[index]) {
+                            const item = props.storage[index];
 
-                        return (
-                            <li key={"storage-item-" + item.id}
-                                className={"good-item item-" + item.id +
-                                    (props.selectedGood === item.id ? ' selected' : "")}
-                                onClick={() => {
-                                    props.onSelectGood(item.id)
-                                }
-                                }
-                            >
-                                <span className="good-description">{item.qty} шт</span>
-                            </li>
-                        );
-                    } else {
-                        return (
-                            <li key={"empty-cell-" + index}
-                                className="good-item no-item"></li>
-                        )
-                    }
-                })}
+                            return (
+                                <li key={"storage-item-" + item.id}
+                                    className={"good-item item-" + item.id +
+                                        (props.selectedGood === item.id ? ' selected' : "")}
+                                    onClick={() => {
+                                        props.onSelectGood(item.id)
+                                    }
+                                    }
+                                >
+                                    <span className="good-description">{item.qty} шт</span>
+                                </li>
+                            );
+                        } else {
+                            return (
+                                <li key={"empty-cell-" + index}
+                                    className="good-item no-item"></li>
+                            )
+                        }
+                    })}
             </ul>
             {props.selectedGood ? (
                 <>
@@ -75,9 +76,10 @@ const Storage = (props) => {
                                         setTargetCityId(parseInt(e.currentTarget.value, 10))
                                     }}
                             >
-                                <option value={1}>Город 1</option>
-                                <option value={2}>Город 2</option>
-                                <option value={3}>Город 3</option>
+                                {cities.map(city => {
+                                        return <option value={city.id}>{city.title}</option>
+                                    }
+                                )}
                             </select>
                         </div>
                         <div className='controls'>

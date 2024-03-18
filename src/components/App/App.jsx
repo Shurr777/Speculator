@@ -60,6 +60,18 @@ function App() {
                 },
             ]
         },
+        {
+            cityId: 3,
+            storage: []
+        },
+        {
+            cityId: 4,
+            storage: []
+        },
+        {
+            cityId: 5,
+            storage: []
+        },
     ]);
     const [cityStorages, setCityStorages] = useState([
         {
@@ -67,31 +79,135 @@ function App() {
             storage: [
                 {
                     id: 1,
-                    priceStats: [10, 15, 18, 13, 15, 32, 28],
-                    maxStep: 5,
-                    minPrice: 10,
-                    maxPrice: 40,
+                    priceStats: [12, 13, 14, 15, 12, 13, 13],
+                    maxStep: 1,
+                    minPrice: 12,
+                    maxPrice: 18,
                 },
                 {
                     id: 2,
-                    priceStats: [12, 13, 18, 13, 15, 32, 28],
-                    maxStep: 7,
-                    minPrice: 5,
-                    maxPrice: 70
+                    priceStats: [15, 16, 16, 15, 14, 13, 12],
+                    maxStep: 1,
+                    minPrice: 12,
+                    maxPrice: 20,
                 },
                 {
                     id: 3,
-                    priceStats: [25, 28, 31, 24, 18, 27, 28],
-                    maxStep: 8,
+                    priceStats: [8, 9, 10, 11, 10, 9, 10],
+                    maxStep: 1,
+                    minPrice: 8,
+                    maxPrice: 15,
+                },
+                {
+                    id: 12,
+                    priceStats: [15, 17, 15, 16, 18, 20, 21],
+                    maxStep: 2,
                     minPrice: 15,
-                    maxPrice: 50
+                    maxPrice: 21,
+                },
+                {
+                    id: 13,
+                    priceStats: [20, 23, 26, 24, 27, 25, 24],
+                    maxStep: 3,
+                    minPrice: 20,
+                    maxPrice: 35,
+                },
+                {
+                    id: 7,
+                    priceStats: [30, 35, 40, 38, 37, 42, 47],
+                    maxStep: 5,
+                    minPrice: 30,
+                    maxPrice: 50,
                 },
             ],
         },
-        /*{
+        {
             cityId: 2,
-            storage: [],
-        }*/
+            storage: [
+                {
+                    id: 1,
+                    priceStats: [12, 13, 14, 15, 12, 13, 13],
+                    maxStep: 1,
+                    minPrice: 9,
+                    maxPrice: 15,
+                },
+                {
+                    id: 2,
+                    priceStats: [13, 14, 15, 16, 17, 18, 19],
+                    maxStep: 1,
+                    minPrice: 13,
+                    maxPrice: 24,
+                },
+                {
+                    id: 3,
+                    priceStats: [10, , 11, 12, 11, 12, 13, 14],
+                    maxStep: 1,
+                    minPrice: 10,
+                    maxPrice: 18,
+                },
+                {
+                    id: 6,
+                    priceStats: [8, 7, 8, 9, 10, 9, 8],
+                    maxStep: 1,
+                    minPrice: 6,
+                    maxPrice: 13,
+                },
+                {
+                    id: 12,
+                    priceStats: [14, 15, 17, 16, 15, 17, 15],
+                    maxStep: 2,
+                    minPrice: 14,
+                    maxPrice: 17,
+                },
+                {
+                    id: 14,
+                    priceStats: [30, 35, 40, 38, 37, 40, 38],
+                    maxStep: 5,
+                    minPrice: 25,
+                    maxPrice: 40,
+                },
+            ],
+        },
+        {
+            cityId: 3,
+            storage: [
+                {
+                    id: 1,
+                    priceStats: [12, 13, 14, 15, 16, 15, 14],
+                    maxStep: 1,
+                    minPrice: 10,
+                    maxPrice: 20,
+                },
+                {
+                    id: 6,
+                    priceStats: [5, 6, 7, 8, 7, 8, 9],
+                    maxStep: 1,
+                    minPrice: 5,
+                    maxPrice: 10,
+                },
+                {
+                    id: 13,
+                    priceStats: [15, 20, 25, 30, 25, 22, 21],
+                    maxStep: 5,
+                    minPrice: 15,
+                    maxPrice: 40,
+                },
+                {
+                    id: 14,
+                    priceStats: [20, 25, 22, 27, 26, 29, 30],
+                    maxStep: 5,
+                    minPrice: 20,
+                    maxPrice: 35,
+                },
+                {
+                    id: 7,
+                    priceStats: [15, 20, 25, 23, 22, 27, 28],
+                    maxStep: 5,
+                    minPrice: 15,
+                    maxPrice: 40,
+                },
+            ],
+        },
     ])
     const [money, setMoney] = useState(1000);
     const [days, setDays] = useState(1);
@@ -109,36 +225,12 @@ function App() {
             title: 'Зерно'
         },
         {
-            id: 4,
-            title: 'Грибы'
-        },
-        {
-            id: 5,
-            title: 'Клевер'
-        },
-        {
             id: 6,
             title: 'Лук'
         },
         {
             id: 7,
             title: 'Виноград'
-        },
-        {
-            id: 8,
-            title: 'Орехи'
-        },
-        {
-            id: 9,
-            title: 'Вилы'
-        },
-        {
-            id: 10,
-            title: 'Доски'
-        },
-        {
-            id: 11,
-            title: 'Коса'
         },
         {
             id: 12,
@@ -247,7 +339,7 @@ function App() {
                 const goodData = storage[goodIndex]; //id, priceStats, maxStep, min, max price
 
                 const priceChangeSign = getRandomInt(2) ? 1 : -1;
-                const priceChangeValue = getRandomInt(goodData.maxStep) * priceChangeSign;
+                const priceChangeValue = getRandomInt(goodData.maxStep + 1) * priceChangeSign;
 
                 let newPrice = goodData.priceStats.slice(-1).pop() + priceChangeValue;
 
