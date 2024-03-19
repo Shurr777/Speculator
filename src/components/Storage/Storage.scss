@@ -98,20 +98,30 @@
 }
 
 .sell-panel {
-  display: flex;
-  justify-content: space-between;
   padding: 20px 30px;
+
+  .sell-panel-content {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+
+  .sell-panel-info {
+    font-size: 10px;
+    text-align: left;
+  }
 
   .controls {
     display: flex;
     justify-content: space-between;
+    min-width: 120px;
 
     .input {
       background: none;
       border: 1px solid #877f72;
       color: #a68156;
       margin-right: 5px;
-      width: 50px;
+      width: 30px;
     }
   }
 }
@@ -127,7 +137,8 @@
     border: 1px solid #877f72;
     color: #a68156;
   }
-  option{
+
+  option {
     color: #a68156;
     background-color: #44200c;
   }

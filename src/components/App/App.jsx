@@ -282,8 +282,8 @@ function App() {
         }
     }
 
-    const cellGoods = (goodId, qty) => {
-        const storagesNew = storages;
+    const cellGoods = (goodId, qty, totalPrice) => {
+        const storagesNew = [...storages];
         let moneyNew = money
 
         const index = storages.findIndex((storage) => {
@@ -303,15 +303,10 @@ function App() {
                 });
 
                 if(cityGoodIndex > -1) {
-                    const price =
-                        currentCityStorage[cityGoodIndex].priceStats[
-                        currentCityStorage[cityGoodIndex].priceStats.length - 1
-                            ];
-
                     if(storagesNew[index].storage[goodIndex].qty >= qty) {
 
                         storagesNew[index].storage[goodIndex].qty -= qty
-                        moneyNew += qty * price;
+                        moneyNew += totalPrice;
 
                         if(storagesNew[index].storage[goodIndex].qty === 0) {
                             removeProduct(storagesNew[index].storage[goodIndex].id)
@@ -494,6 +489,19 @@ function App() {
         setStorages(storagesNew);
     }
 
+    const getSelectedProductPrice = () => {
+        const cityStorage = getCityStorage();
+
+        const product = cityStorage.find(product => {
+            return product.id === selectedGood
+        })
+
+        if(product && product.priceStats) {
+            return product.priceStats[product.priceStats.length - 1]
+        }
+        return 0;
+    }
+
     useEffect(() => {
         liveProcess()
     }, []);
@@ -516,11 +524,12 @@ function App() {
                                  storage={getStorageByCity()}
                                  goods={goods}
                                  selectedGood={selectedGood}
+                                 selectedProductPrice={getSelectedProductPrice()}
                                  onSelectGood={(goodId) => {
                                      setSelectedGood(goodId)
                                  }}
-                                 onCell={(id, qty) => {
-                                     cellGoods(id, qty)
+                                 onCell={(id, qty, price) => {
+                                     cellGoods(id, qty, price)
                                  }}
                                  onTransport={(targetCityId) => {
                                      createTransportOrder(targetCityId)
