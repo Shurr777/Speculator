@@ -4,11 +4,24 @@ import Storage from "../Storage/Storage";
 import CityStorage from "../CityStorage/CityStorage";
 import Transportation from "../Transportation/transportattion";
 import Stats from "../Stats/Stats";
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
+import Bank from "../Bank/Bank";
 
 function App() {
     const [currentCity, setCurrentCity] = useState(1);
     const [selectedGood, setSelectedGood] = useState(null);
+    const [deposits, setDeposits] = useState([
+        {
+            id: 1,
+            amount: 100,
+            days: 10
+        },
+        {
+            id: 2,
+            amount: 200,
+            days: 20
+        }
+    ])
     const [storages, setStorages] = useState([
         {
             cityId: 1,
@@ -545,8 +558,10 @@ function App() {
                     <div className="stats">
                         <Stats days={days}
                                money={money}
-
                         />
+                    </div>
+                    <div className="deposits">
+                        <Bank deposits={deposits}/>
                     </div>
                 </div>
                 <div className="column">
