@@ -10,13 +10,5 @@ export const cities = [
     {
         id: 3,
         title: 'Город 3',
-    },
-    {
-        id: 4,
-        title: 'Город 4',
-    },
-    {
-        id: 5,
-        title: 'Город 5',
     }
 ]
