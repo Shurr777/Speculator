@@ -15,14 +15,6 @@ export const defaultStoragesData = [
                 qty: 193
             },
             {
-                id: 4,
-                qty: 144
-            },
-            {
-                id: 5,
-                qty: 155
-            },
-            {
                 id: 6,
                 qty: 176
             },
@@ -30,10 +22,7 @@ export const defaultStoragesData = [
                 id: 7,
                 qty: 137
             },
-            {
-                id: 8,
-                qty: 158
-            },
+
         ]
     },
     {
@@ -239,18 +228,4 @@ export const goods =  [
     }
 ];
 
-/*
-export const cities = [
-    {
-        id: 1,
-        title: 'Город 1',
-    },
-    {
-        id: 2,
-        title: 'Город 2',
-    },
-    {
-        id: 3,
-        title: 'Город 3',
-    }
-]*/
+

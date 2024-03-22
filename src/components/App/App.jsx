@@ -17,15 +17,14 @@ function App() {
     const [currentCity, setCurrentCity] = useState(1);
     const [selectedGood, setSelectedGood] = useState(null);
     const [deposits, setDeposits] = useState(defaultDepositData)
-    const [storages, setStorages] = useState(defaultStoragesData);
+    const [playerStorages, setPlayerStorages] = useState(defaultStoragesData);
     const [cityStorages, setCityStorages] = useState(defaultCityStoragesData)
     const [money, setMoney] = useState(1000);
     const [days, setDays] = useState(1);
     const [transportOrders, setTransportOrders] = useState([])
     const [orderId, setOrderId] = useState(1)
 
-
-    const getStorageByCity = () => {
+    const getCurrentStorage = (storages) =>{
         const store = storages.find((storage) => {
             return storage.cityId === currentCity
         });
@@ -36,33 +35,11 @@ function App() {
         }
     }
 
-    const getCityStorageByCity = () => {
-        const store = cityStorages.find((storage) => {
-            return storage.cityId === currentCity
-        });
-        if(store) {
-            return store.storage
-        } else {
-            return []
-        }
-    }
-
-    const getCityStorage = () => {
-        const store = cityStorages.find((storage) => {
-            return storage.cityId === currentCity
-        });
-        if(store) {
-            return store.storage
-        } else {
-            return []
-        }
-    }
-
     const cellGoods = (goodId, qty, totalPrice) => {
-        const storagesNew = [...storages];
+        const storagesNew = [...playerStorages];
         let moneyNew = money
 
-        const index = storages.findIndex((storage) => {
+        const index = playerStorages.findIndex((storage) => {
             return storage.cityId === currentCity
         })
 
@@ -72,7 +49,7 @@ function App() {
             });
 
             if(goodIndex > -1) {
-                const currentCityStorage = getCityStorageByCity();
+                const currentCityStorage = getCurrentStorage(cityStorages);
 
                 const cityGoodIndex = currentCityStorage.findIndex(good => {
                     return good.id === goodId;
@@ -93,7 +70,7 @@ function App() {
                 }
             }
         }
-        setStorages(storagesNew);
+        setPlayerStorages(storagesNew);
     }
 
     const getRandomInt = (max) => {
@@ -108,7 +85,6 @@ function App() {
 
             for (let goodIndex = 0; goodIndex < storage.length; goodIndex++) {
                 const goodData = storage[goodIndex]; //id, priceStats, maxStep, min, max price
-
                 const priceChangeSign = getRandomInt(2) ? 1 : -1;
                 const priceChangeValue = getRandomInt(goodData.maxStep + 1) * priceChangeSign;
 
@@ -182,7 +158,7 @@ function App() {
     const createTransportOrder = (targetCityId) => {
         const newOrders = [...transportOrders];
 
-        const storage = getStorageByCity()
+        const storage = getCurrentStorage(playerStorages)
         const goodIndex = storage.findIndex(good => good.id === selectedGood);
 
         if(goodIndex > -1) {
@@ -201,9 +177,9 @@ function App() {
     }
 
     const removeProduct = (productId) => {
-        const storagesNew = storages;
+        const storagesNew = playerStorages;
 
-        const index = storages.findIndex((storage) => {
+        const index = playerStorages.findIndex((storage) => {
             return storage.cityId === currentCity
         })
 
@@ -216,16 +192,16 @@ function App() {
                 storagesNew[index].storage.splice(productIndex, 1)
             }
         }
-        setStorages(storagesNew);
+        setPlayerStorages(storagesNew);
     };
 
     const buyGoods = (goodId, qty, price) => {
         const totalPrice = qty * price;
 
         if(money >= totalPrice) {
-            const storagesNew = storages;
+            const storagesNew = playerStorages;
 
-            const index = storages.findIndex((storage) => {
+            const index = playerStorages.findIndex((storage) => {
                 return storage.cityId === currentCity
             })
 
@@ -245,7 +221,7 @@ function App() {
                 }
             }
 
-            setStorages(storagesNew);
+            setPlayerStorages(storagesNew);
             setMoney(money - totalPrice)
         }
     }
@@ -264,9 +240,9 @@ function App() {
             return newOrders
         })
         //update product qty in target city
-        const storagesNew = storages;
+        const storagesNew = playerStorages;
 
-        const index = storages.findIndex((storage) => {
+        const index = playerStorages.findIndex((storage) => {
             return storage.cityId === order.targetCityId;
         })
 
@@ -284,11 +260,11 @@ function App() {
                 });
             }
         }
-        setStorages(storagesNew);
+        setPlayerStorages(storagesNew);
     }
 
     const getSelectedProductPrice = () => {
-        const cityStorage = getCityStorage();
+        const cityStorage = getCurrentStorage(cityStorages);
 
         const product = cityStorage.find(product => {
             return product.id === selectedGood
@@ -319,7 +295,7 @@ function App() {
                 <div className="column">
                     <div className="storage">
                         <Storage currentCity={currentCity}
-                                 storage={getStorageByCity()}
+                                 storage={getCurrentStorage(playerStorages)}
                                  goods={goods}
                                  selectedGood={selectedGood}
                                  selectedProductPrice={getSelectedProductPrice()}
@@ -352,7 +328,7 @@ function App() {
                 <div className="column">
                     <div className="city-storage">
                         <CityStorage
-                            storage={getCityStorage()}
+                            storage={getCurrentStorage(cityStorages)}
                             onBuy={(goodId, number, price) => {
                                 buyGoods(goodId, number, price)
                             }
