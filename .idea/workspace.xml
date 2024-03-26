@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a9302cb1-ca2e-48ba-94b2-d999abe27622" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cities.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cities/Cities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cities/Cities.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cities/Cities.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cities/Cities.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CityStorage/components/StorageItem.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/vars.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Storage/Storage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Storage/Storage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Transportation/transportation.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Transportation/transportation.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CityStorage/CityStorage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +71,7 @@
       <workItem from="1710831595577" duration="1412000" />
       <workItem from="1711043008551" duration="4310000" />
       <workItem from="1711123250956" duration="3770000" />
-      <workItem from="1711448447419" duration="5131000" />
+      <workItem from="1711448447419" duration="5919000" />
     </task>
     <servers />
   </component>

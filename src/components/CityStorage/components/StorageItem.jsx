@@ -10,10 +10,10 @@ const StorageItem = ({good, onBuy}) => {
                 <div className={"good-item item-" + good.id}/>
                 <input
                     className="input-number"
-                    name="count"
+                    name={"count" + new Date()}
                     value={number}
                     maxLength={3}
-                    autoComplete="false"
+                    autoComplete="new-password"
                     onChange={(e) => {
                         setNumber(parseInt(e.currentTarget.value, 10 || ''))
                     }}
@@ -21,7 +21,9 @@ const StorageItem = ({good, onBuy}) => {
 
                 <button className="button"
                         onClick={() => {
-                            onBuy(good.id, number, good.priceStats[good.priceStats.length - 1]);
+                            if(number) {
+                                onBuy(good.id, number, good.priceStats[good.priceStats.length - 1]);
+                            }
                             setNumber('');
                         }}
                 >

@@ -38,8 +38,9 @@ const CityStorage = ({storage, onBuy}) => {
             intersect: false,
             caretSize: 3,
 
-            backgroundColor: "#44200c",
-            bodyFontColor: "#a68156",
+            backgroundColor: "#8d6048",
+            bodyFontColor: "#d6ba7a",
+            borderColor: "#8d6048",
             borderWidth: 1,
             displayColors: false,
         },
@@ -72,8 +73,8 @@ const CityStorage = ({storage, onBuy}) => {
                 {
                     label: 'Цена за шт',
                     data: priceStats,
-                    backgroundColor: "#a68156",
-                    borderColor: "rgba(166, 129, 86, 0.2)"
+                    backgroundColor: "#8d6048",
+                    borderColor: "#8d604844"
                 }
             ],
         }
@@ -88,32 +89,6 @@ const CityStorage = ({storage, onBuy}) => {
                         return (
                             <div key={"storage-item" + good.id} className="good-item-wrapper">
                                 <StorageItem good={good} onBuy={onBuy}/>
-                                {/*<div className="good-item-description">
-                                    <div className={"good-item item-" + good.id}/>
-                                    <input
-                                        className="input-number"
-                                        name="count"
-                                        value={number}
-                                        maxLength={3}
-                                        autoComplete={false}
-                                        onChange={(e) => {
-                                            setNumber(e.currentTarget.value)
-                                        }}
-                                    />
-
-                                    <button className="button"
-                                            onClick={() => {
-                                                onBuy(good.id, number, good.priceStats[good.priceStats.length - 1]);
-                                                setNumber(0);
-                                            }}
-                                    >
-                                        Купить
-                                    </button>
-
-                                    <p className='price-description'>
-                                        {good.priceStats[good.priceStats.length - 1]} за ед.
-                                    </p>
-                                </div>*/}
                                 <div className="good-item-stats">
                                     <Line
                                         data={getGoodData(good.priceStats)}
