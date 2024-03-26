@@ -1,19 +1,22 @@
+@import "../../vars";
+
 .app {
-  margin: 0 auto;
+  margin: 20px auto;
   text-align: center;
   width: 800px;
-  background: #665858;
+  background: $color1;
 
   .app-name {
     text-align: center;
-    padding: 0;
+    padding: 15px 0 20px;
+    margin: 0;
+    font-size: 24px;
   }
 
   .content {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background: #2d251a;
 
     .column {
       width: 300px;
@@ -23,17 +26,18 @@
       }
     }
   }
-  .title{
-    background: #44200c;
-    border: 1px solid #877f72;
+
+  .title {
+    background: $color2;
+    border: 1px solid $color2;
     padding: 10px;
     margin: 0;
-    color: #a68156;
-
+    color: $color5;
+    font-size: 18px;
   }
 
-  .panel{
-    border: 1px solid #877f72;
+  .panel {
+    border: 1px solid $color2;
     border-top: 0;
     margin-bottom: 10px;
   }
