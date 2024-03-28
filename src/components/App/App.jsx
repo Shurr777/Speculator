@@ -298,7 +298,8 @@ const App = () => {
         money,
         deposits,
         cityStorages,
-        buyGoods
+        buyGoods,
+        openDeposit
     } = useAppLogic();
 
     return (
@@ -343,7 +344,10 @@ const App = () => {
                         />
                     </div>
                     <div className="deposits">
-                        <Bank deposits={deposits}/>
+                        <Bank deposits={deposits}
+                              onOpenDeposit={openDeposit}
+                              money={money}
+                        />
                     </div>
                 </div>
                 <div className="column">

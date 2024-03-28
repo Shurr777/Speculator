@@ -264,6 +264,24 @@ export const useAppLogic = () => {
         return 0;
     }
 
+    const openDeposit = (amount) => {
+        if(amount > 0 && money >= amount) {
+            setDeposits((oldDeposits) => {
+                const newDeposits = [...oldDeposits];
+
+                newDeposits.push({
+                    days: 30,
+                    amount
+                })
+
+                setMoney(oldMoney => {
+                    return oldMoney - amount
+                });
+                return newDeposits
+            })
+        }
+    }
+
     useEffect(() => {
         liveProcess()
     }, []);
@@ -284,6 +302,7 @@ export const useAppLogic = () => {
         money,
         deposits,
         cityStorages,
-        buyGoods
+        buyGoods,
+        openDeposit
     }
 }

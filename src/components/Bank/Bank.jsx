@@ -1,14 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Bank.scss';
 
 const Bank = (props) => {
 
+    const [amount, setAmount] = useState(null)
 
     return (
         <div>
             <h2 className="title">Банк</h2>
             <div className="panel">
-                {props.deposits.map((deposit) =>{
+
+                <div className='sell-panel'>
+                    <div className="sell-panel-content">
+                        <div>Сумма</div>
+                        <div className='controls'>
+                            <input type="text"
+                                   className="input"
+                                   maxLength="4"
+                                   value={amount}
+                                   onChange={(e) => {
+                                       setAmount(parseInt(e.target.value, 10) || "")
+                                   }}
+                            />
+                            <button className="button"
+                                    onClick={() => {
+                                        props.onOpenDeposit(amount);
+                                        //setQty('')
+                                    }}
+                                    disabled={!amount || props.money < amount}
+                            >
+                                Открыть
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {props.deposits.map((deposit) => {
                     return (
                         <div className="good-item-wrapper">
                             <div className="good-item-description">
@@ -18,7 +45,7 @@ const Bank = (props) => {
                                 <div>
                                     <div className="header">Сумма: {deposit.amount}</div>
                                     <div className="days">
-                                       Дней до получения процента: {deposit.days}
+                                        Дней до получения процента: {deposit.days}
                                     </div>
                                 </div>
                             </div>
