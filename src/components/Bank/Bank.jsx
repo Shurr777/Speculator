@@ -3,7 +3,7 @@ import './Bank.scss';
 
 const Bank = (props) => {
 
-    const [amount, setAmount] = useState(null)
+    const [amount, setAmount] = useState('')
 
     return (
         <div>
@@ -35,9 +35,12 @@ const Bank = (props) => {
                     </div>
                 </div>
 
-                {props.deposits.map((deposit) => {
+                {props.deposits.map((deposit, index) => {
                     return (
-                        <div className="good-item-wrapper">
+                        <div
+                        key={'deposit-' + index}
+                            className="good-item-wrapper"
+                        >
                             <div className="good-item-description">
                                 <div className="good-item item-deposit"/>
                             </div>

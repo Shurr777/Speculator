@@ -1,5 +1,6 @@
 import React from 'react';
 import './Stats.scss'
+import {settings} from "../../config";
 
 const Stats = ({days, money}) => {
     return (
@@ -7,10 +8,10 @@ const Stats = ({days, money}) => {
             <h2 className="title">Статистика</h2>
             <div className="panel stats-panel">
                 <div className="money">
-                    Деньги: {money}
+                    {money} / {settings.goalMoney}
                 </div>
                 <div className="date">
-                    Текущий день: {days}
+                    Дни: {days} / {settings.goalDays}
                 </div>
             </div>
         </div>

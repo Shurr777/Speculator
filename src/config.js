@@ -111,7 +111,7 @@ export const defaultCityStoragesData = [
             },
             {
                 id: 3,
-                priceStats: [10, , 11, 12, 11, 12, 13, 14],
+                priceStats: [10, 11, 12, 11, 12, 13, 14],
                 maxStep: 1,
                 minPrice: 10,
                 maxPrice: 18,
@@ -227,5 +227,17 @@ export const goods =  [
         title: 'Кирка'
     }
 ];
+
+export const settings = {
+    goalMoney: 5000,
+    goalDays: 100,
+    startMoney: 1000,
+}
+
+export const gameStatuses = {
+    new: 1,
+    fail: 2,
+    win: 3,
+}
 
 

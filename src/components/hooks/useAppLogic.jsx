@@ -1,5 +1,11 @@
 import {useEffect, useState} from "react";
-import {defaultCityStoragesData, defaultDepositData, defaultStoragesData} from "../../config";
+import {
+    defaultCityStoragesData,
+    defaultDepositData,
+    defaultStoragesData,
+    settings,
+    gameStatuses
+} from "../../config";
 
 export const useAppLogic = () => {
     const [currentCity, setCurrentCity] = useState(1);
@@ -7,10 +13,11 @@ export const useAppLogic = () => {
     const [deposits, setDeposits] = useState(defaultDepositData)
     const [playerStorages, setPlayerStorages] = useState(defaultStoragesData);
     const [cityStorages, setCityStorages] = useState(defaultCityStoragesData)
-    const [money, setMoney] = useState(1000);
+    const [money, setMoney] = useState(settings.startMoney);
     const [days, setDays] = useState(1);
     const [transportOrders, setTransportOrders] = useState([])
-    const [orderId, setOrderId] = useState(1)
+    const [orderId, setOrderId] = useState(1);
+    const [gameStatus, setGameStatus] = useState(gameStatuses.new);
 
     const getCurrentStorage = (storages) => {
         const store = storages.find((storage) => {
@@ -132,15 +139,6 @@ export const useAppLogic = () => {
             });
             return newDeposits
         })
-    }
-
-    const liveProcess = () => {
-        setInterval(() => {
-            updateCityStorages();
-            updateTransportOrders();
-            updateDeposits()
-            setDays(days => days + 1);
-        }, 3000)
     }
 
     const createTransportOrder = (targetCityId) => {
@@ -282,9 +280,34 @@ export const useAppLogic = () => {
         }
     }
 
+    const checkGameStatus = (days) => {
+        if(days > settings.goalDays && money < settings.goalMoney) {
+            //fail
+            setGameStatus(gameStatuses.fail)
+        }
+
+        if(money >= settings.goalMoney) {
+            //win
+            setGameStatus(gameStatuses.win)
+        }
+    }
+
+    const liveProcess = () => {
+        setTimeout(() => {
+            updateCityStorages();
+            updateTransportOrders();
+            updateDeposits()
+            checkGameStatus(days + 1)
+
+            setDays(days => days + 1);
+        }, 5000)
+    }
+
     useEffect(() => {
-        liveProcess()
-    }, []);
+        if(gameStatus === gameStatuses.new) {
+            liveProcess()
+        }
+    }, [days]);
 
     return {
         currentCity,
@@ -303,6 +326,7 @@ export const useAppLogic = () => {
         deposits,
         cityStorages,
         buyGoods,
-        openDeposit
+        openDeposit,
+        gameStatus
     }
 }
